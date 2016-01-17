@@ -1,15 +1,24 @@
 #!/usr/bin/env python
 
 
-import yaml, json, pprint
+#from __future__ import print_function
+import yaml, json
+from pprint import pprint
 
-pp = pprint.PrettyPrinter(indent=4)
+def print_out(data_type, data):
+    
+    print("Here is the %s data:" %data_type)
+    
+    pprint(data)
 
-print("Here is the YAML data:")
+
 with open ("exercise6.yml") as yamlfile:
-    pprint.pprint(yaml.load(yamlfile), indent=4)
+    yamldata = yaml.load(yamlfile)
 
-print("Here is the JSON data:")
+print_out("yaml", yamldata)
+
+
 with open ("exercise6.json") as jsonfile:
-    pprint.pprint(json.load(jsonfile), indent=4)
+    jsondata = json.load(jsonfile)
 
+print_out("json", jsondata)

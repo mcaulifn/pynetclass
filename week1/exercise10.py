@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-
 from ciscoconfparse import *
 import re
 
@@ -8,16 +7,10 @@ import re
 parsedfile = CiscoConfParse("cisco_ipsec.txt")
 
 
-crypto_map = parsedfile.find_objects(r"^crypto map")
-
-no_aes_maps = []
-temp = []
+crypto_map = parsedfile.find_objects_wo_child(r"^crypto map", r"set transform-set AES.*")
 
 for each in crypto_map:
-    child = each.re_search_children(r"set transform-set (?!AES)")
-    if child:
-        temp.append(each)
-        temp.append(child)
-        no_aes_maps.append(temp)
-
-print(no_aes_maps)
+	for child in each.children:
+		match = re.search(r"^ set transform-set (.*)$", child.text)
+		if match:
+			print(each.text + " -- " + match.group(1))

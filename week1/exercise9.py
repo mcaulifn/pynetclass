@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 
 
-from __future__ import print_function
-from ciscoconfparse import CiscoConfParse
+from ciscoconfparse import *
 
 
 parsedfile = CiscoConfParse("cisco_ipsec.txt")

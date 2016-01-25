@@ -1,0 +1,27 @@
+(applied_python)[mcaulifn@ip-172-30-0-217 class2]$ ll
+total 16
+-rw-rw-r-- 1 mcaulifn mcaulifn 340 Jan 24 16:37 exercise1b.py
+-rw-rw-r-- 1 mcaulifn mcaulifn  62 Jan 24 16:35 exercise1c.py
+-rw-rw-r-- 1 mcaulifn mcaulifn  77 Jan 24 16:32 my_func.py
+-rw-rw-r-- 1 mcaulifn mcaulifn 299 Jan 24 16:34 my_func.pyc
+(applied_python)[mcaulifn@ip-172-30-0-217 class2]$ python exercise1c.py
+hello
+(applied_python)[mcaulifn@ip-172-30-0-217 class2]$ mkdir ../randomdir
+(applied_python)[mcaulifn@ip-172-30-0-217 class2]$ mv my_func.py ../randomdir/
+(applied_python)[mcaulifn@ip-172-30-0-217 class2]$ python exercise1c.py
+hello
+(applied_python)[mcaulifn@ip-172-30-0-217 class2]$ ll
+total 12
+-rw-rw-r-- 1 mcaulifn mcaulifn 340 Jan 24 16:37 exercise1b.py
+-rw-rw-r-- 1 mcaulifn mcaulifn  62 Jan 24 16:35 exercise1c.py
+-rw-rw-r-- 1 mcaulifn mcaulifn 299 Jan 24 16:34 my_func.pyc
+(applied_python)[mcaulifn@ip-172-30-0-217 class2]$ rm my_func.pyc
+(applied_python)[mcaulifn@ip-172-30-0-217 class2]$ python exercise1c.py
+Traceback (most recent call last):
+  File "exercise1c.py", line 3, in <module>
+    import my_func
+ImportError: No module named my_func
+(applied_python)[mcaulifn@ip-172-30-0-217 class2]$ mv ../randomdir/my_func.py ../../applied_python/lib/python2.7/site-packages/
+(applied_python)[mcaulifn@ip-172-30-0-217 class2]$ python exercise1c.py
+hello
+

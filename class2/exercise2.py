@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+""" This module uses telnet to log in to a router and run the show ip int bri command."""
 
 
 import telnetlib
@@ -17,7 +17,7 @@ def login(routerip, port, timeout, creds):
         conn = telnetlib.Telnet(routerip, port, timeout)
 
     except socket.timeout:
-        sys.ext("Connection timed-out")
+        sys.exit("Connection timed-out")
 
     output = conn.read_until("Username:", 10)
     conn.write(creds[0] + "\n")
@@ -30,7 +30,7 @@ def login(routerip, port, timeout, creds):
     output = conn.read_very_eager()
 
     auth_fail_match = re.search(r".*\s*\% Authentication failed\s*Username\:", output)
-    
+
     if auth_fail_match:
         conn.close()
         sys.exit("Authentication failed")
@@ -41,7 +41,7 @@ def run_cmd(conn, cmd):
     """run command that is passed in"""
 
     cmd = cmd.rstrip()
-    
+
     conn.write(cmd + "\n")
     time.sleep(3)
 
@@ -56,7 +56,7 @@ def main():
     TELNET_PORT = 23
 
     #initiate connection and login
-    router_telnet = login(routerip, TELNET_PORT, TELNET_TIMEOUT, creds) 
+    router_telnet = login(routerip, TELNET_PORT, TELNET_TIMEOUT, creds)
 
 
     #disable paging

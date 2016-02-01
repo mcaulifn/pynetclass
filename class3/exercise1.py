@@ -133,7 +133,7 @@ def email(olddata, newdata):
     '''
 
     
-    recipient = 'mcaulifn@outook.com'
+    recipient = 'mcaulifn@outlook.com'
     subject = 'Configuration Changed for %s' % newdata[0]
     message = ''' 
 

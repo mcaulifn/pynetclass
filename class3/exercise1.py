@@ -8,6 +8,7 @@ And more...
 from snmp_helper import snmp_get_oid_v3, snmp_extract
 import yaml
 from time import gmtime, strftime
+import email_helper
 
 '''
 snmp_get_oid_v3(snmp_device, snmp_user, oid='.1.3.6.1.2.1.1.1.0', auth_proto='sha', encrypt_proto='aes128', display_errors=True):
@@ -18,10 +19,6 @@ snmp_device = ('10.10.10.10', 161)
 
 '''
 
-'''
-poll device for name, look for file with that name/IP combo? or just go the easy way and statically define the names....
-easy way!
-'''
 
 TIMEF = "%Y-%m-%d %H:%M:%S"
 
@@ -66,12 +63,25 @@ def write(filename, newdata):
     yfile.close()
     return
 
+def readfile(device):
+    '''
+    Attempts to open the existing file
+    '''
+
+    try:
+        filename = '%s.yaml' % device[0]
+        yfile = file(filename, 'r')
+        olddata = yaml.load(yfile)
+        return olddata
+
+    except IOError:
+        print("No polling data exsists, nothing to compare to.")
+        
 
 def poll(device):
     '''
-    the polling function...
-    this is really a poll and write data function. I think i need to split up in to get and write
-    
+    Poll the device and return the new data.
+    Accepts 'device' which is a tuple of name, ip, and snmp port.
     '''
 
 
@@ -86,7 +96,10 @@ def poll(device):
 
 def compare():
     '''
-    this is the compare function
+    The compare function attempts to open the existing file. If none exist, new files are created.
+    If the file exist, the last_changed value from the file is compared with current data.
+    If the values are the same, new data is written and the function ends. If the values are not
+    the same, the email function is called.
     '''
 
     for device in devices:
@@ -111,7 +124,29 @@ def compare():
     return None
 
 def email(olddata, newdata):
-    pass
+    '''
+    email function to send an alert
+    '''
+
+    
+    recipient = 'mcaulifn@outook.com'
+    subject = 'Configuration Changed for %s' % newdata[0]
+    message = ''' 
+
+A configuration change was detected. See event details below:
+
+Device name: %s
+IP: %s
+Change detected at: %s UTC
+Last poll: %s UTC
+
+''' % (newdata[0], newdata[1], newdata[2], olddata.poll_time)
+
+    sender = 'mcaulifn@outlook.com' 
+
+    email_helper.send_mail(recipient, subject, message, sender)
+
+    return None
 
 
 def main():

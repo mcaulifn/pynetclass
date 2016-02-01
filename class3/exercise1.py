@@ -19,7 +19,8 @@ snmp_device = ('10.10.10.10', 161)
 '''
 
 '''
-Thoughts: poll uptime, poll last change, compare to last entry in file, write new entry, send email if necessary
+poll device for name, look for file with that name/IP combo? or just go the easy way and statically define the names....
+easy way!
 '''
 
 TIMEF = "%Y-%m-%d %H:%M:%S"
@@ -32,9 +33,13 @@ oids = {
 
 snmp_user = ('pysnmp', 'galileo1', 'galileo1')
 
-devices = [('50.76.53.27', 7961), ('50.76.53.27', 8061)]
+devices = [('rtr1', '50.76.53.27', 7961), ('rtr2', '50.76.53.27', 8061)]
 
 class a_poll:
+    '''
+    This is for writing the data to a file only
+    '''
+
     def __init__(self, device_name, ip, poll_time, up_time, last_changed):
         self.device_name = device_name
         self.ip = ip
@@ -45,38 +50,74 @@ class a_poll:
     def __repr__(self):
         return "%s(device_name=%r, ip=%r, poll_time=%r, up_time=%r, last_changed=%r)" % (
             self.__class__.__name__, self.device_name, self.ip, self.poll_time, self.up_time, self.last_changed)
+    
 
-def poll():
+
+def write(filename, newdata):
     '''
-    the polling function...
+    Write the data to the yaml file
+    Accepts the file name and the data to be written
     '''
 
-    yfile = file('polling.yaml', 'a')
-
-    for device in devices:
-        p_time = strftime(TIMEF, gmtime())
-        poll_temp = []
-        for name, oid in sorted(oids.items()):
-            poll_temp.append(snmp_extract(snmp_get_oid_v3(device, snmp_user, oid, auth_proto='sha', encrypt_proto='aes128', display_errors=True)))
-        yaml.dump(a_poll(poll_temp[1], device[0], p_time, int(poll_temp[2]), int(poll_temp[0])), yfile)
+    yfile = file(filename, 'w')
+ 
+    yaml.dump(a_poll(newdata[0], newdata[1], newdata[2], newdata[3], newdata[4]), yfile)
 
     yfile.close()
+    return
+
+
+def poll(device):
+    '''
+    the polling function...
+    this is really a poll and write data function. I think i need to split up in to get and write
+    
+    '''
+
+
+    p_time = strftime(TIMEF, gmtime())
+    poll_temp = []
+    for name, oid in sorted(oids.items()):
+        poll_temp.append(snmp_extract(snmp_get_oid_v3((device[1],device[2]),snmp_user, oid, auth_proto='sha', encrypt_proto='aes128', display_errors=True)))
+    newdata = [poll_temp[1], device[1], p_time, int(poll_temp[2]), int(poll_temp[0])]
+    return newdata
 
 
 
 def compare():
-    yfile = file('polling.yaml', 'r')
+    '''
+    this is the compare function
+    '''
 
-    print(yaml.load(yfile))
-    pass
+    for device in devices:
+        try:
+            filename = '%s.yaml' % device[0]
+            yfile = file(filename, 'r')
+            olddata = yaml.load(yfile)
+            newdata = poll(device)
 
+            if olddata.last_changed == newdata[4]:
+                print("The configuration for %s has not changed." % device[0])
+                write(filename, newdata)
+            else:
+                print("The configuration for %s has changed. Emailing alert." % device[0])
+                email(olddata, newdata)
+                write(filename, newdata)
+        except IOError:
+            print("No polling data exsists, nothing to compare to.")
+            newdata = poll(device)
+            write(filename, newdata)
 
-def email():
+    return None
+
+def email(olddata, newdata):
     pass
 
 
 def main():
-    poll()
+    '''
+    run the compare function?
+    '''
     compare()
 
 

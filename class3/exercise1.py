@@ -120,7 +120,11 @@ def compare():
             print("No polling data exsists, nothing to compare to.")
             newdata = poll(device)
             write(filename, newdata)
-
+        ''' Move the call to open here
+        if olddata = None:
+            newdata = poll(device)
+        elif olddata.last_changed:
+            '''
     return None
 
 def email(olddata, newdata):

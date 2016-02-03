@@ -140,7 +140,7 @@ def main():
         ('rtr2', '50.76.53.27', 8061)
     ]
 
-    for x in range(0, 3):
+    for x in range(0, 12):
         for each in device_list:
         #iterate through each device, collecting stats for this period and writing graph
             p_time = int(time.time())

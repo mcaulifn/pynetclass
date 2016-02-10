@@ -8,7 +8,7 @@ import netmiko
 
 def main():
     '''main'''
-    
+
     rtr1 = {
         'device_type': 'cisco_ios',
         'ip': '50.76.53.27',
@@ -27,10 +27,10 @@ def main():
 
     routerlist = [rtr1, rtr2]
 
-    
+
     for each in routerlist:
         conn = netmiko.ConnectHandler(**each)
-    
+
         print(conn.send_command('show run | i logging buff'))
         print(conn.send_command('show run | i logging con'))
         conn.send_config_from_file(config_file='rtrchanges.txt')

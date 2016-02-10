@@ -7,6 +7,25 @@ import sys
 import netmiko
 
 
+def display(results):
+    '''prints output from all devices'''
+
+    print('Sucessful:')
+    for each in results:
+        for rtr, value in each.iteritems():
+            success, result = value
+            if success:
+                print(rtr)
+                print result
+
+    print('Failed:')
+    for each in results:
+        for rtr, value in each.iteritems():
+            success, result = value
+            if not success:
+                print(rtr)
+
+
 def mp_run_cmd(device, cmd, queue):
     '''Runs commands in a multiprocessing environment'''
 

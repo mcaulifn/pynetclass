@@ -10,15 +10,16 @@ import netmiko
 def display(results):
     '''prints output from all devices'''
 
-    print('Sucessful:')
+    print('Sucessful:\n')
     for each in results:
         for rtr, value in each.iteritems():
             success, result = value
             if success:
+                print()
                 print(rtr)
                 print result
 
-    print('Failed:')
+    print('\n\nFailed:\n')
     for each in results:
         for rtr, value in each.iteritems():
             success, result = value

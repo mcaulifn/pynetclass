@@ -2,12 +2,11 @@
 """ This module uses telnet to log in to a router and run the show ver command."""
 
 
-import paramiko
 from time import sleep
 from getpass import getpass
 import sys
-import re
 import socket
+import paramiko
 
 MAX_BUFFER = 65535
 
@@ -34,9 +33,9 @@ class Router(object):
             conn_pre = paramiko.SSHClient()
             conn_pre.load_system_host_keys()
 
-            conn_pre.connect(self.ip, port=self.port, username=self.creds[0], password=self.creds[1], 
-                        allow_agent=False, look_for_keys=False)
-            conn =  conn_pre.invoke_shell()
+            conn_pre.connect(self.ip, port=self.port, username=self.creds[0], password=self.creds[1],
+                             allow_agent=False, look_for_keys=False)
+            conn = conn_pre.invoke_shell()
             conn.keep_this = conn_pre
 
         except socket.timeout:

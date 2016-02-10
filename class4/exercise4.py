@@ -2,12 +2,11 @@
 """ This module uses telnet to log in to a router and run the show ver command."""
 
 
-import pexpect
 from time import sleep
 from getpass import getpass
 import sys
-import re
 import socket
+import pexpect
 
 MAX_BUFFER = 65535
 
@@ -32,11 +31,11 @@ class Router(object):
         try:
             conn = pexpect.spawn('/usr/bin/ssh', ['-l', self.creds[0], self.ip, '-p', str(self.port)])
             conn.timeout = 4
-            
+
             conn.expect('ssword:')
             conn.sendline(self.creds[1])
             conn.expect('#')
-            
+
         except socket.timeout:
             sys.exit("Connection timed-out")
 

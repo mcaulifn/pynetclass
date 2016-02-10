@@ -8,7 +8,7 @@ import netmiko
 
 def main():
     '''main'''
-    
+
     rtr1 = {
         'device_type': 'cisco_ios',
         'ip': '50.76.53.27',
@@ -34,10 +34,10 @@ def main():
         }
 
     routerlist = [rtr1, rtr2, srx]
-    
+
     for each in routerlist:
         conn = netmiko.ConnectHandler(**each)
-    
+
         print(conn.send_command('show arp'))
         conn.disconnect()
 

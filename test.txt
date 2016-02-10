@@ -1,3 +1,0 @@
-this is a test file
-
-still a test, but now a branch test

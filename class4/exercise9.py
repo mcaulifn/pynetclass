@@ -99,7 +99,7 @@ def main():
     for proc in procs:
         results.append(mpqueue.get())
 
-    print(results)
+    display(results)
 
 if __name__ == "__main__":
     main()

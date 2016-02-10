@@ -15,9 +15,9 @@ def display(results):
         for rtr, value in each.iteritems():
             success, result = value
             if success:
-                print()
                 print(rtr)
-                print result
+                print(result)
+                print('\n')
 
     print('\n\nFailed:\n')
     for each in results:

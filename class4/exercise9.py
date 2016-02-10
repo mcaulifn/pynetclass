@@ -12,7 +12,7 @@ def mp_run_cmd(device, cmd, queue):
 
     data = {}
 
-    rtrid = device['ip'] + str(device['port'])
+    rtrid = device['ip'] + ':' +str(device['port'])
     cmd = cmd.strip()
 
     try:

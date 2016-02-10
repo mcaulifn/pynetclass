@@ -6,12 +6,9 @@ import netmiko
 
 
 
-
-
-
 def main():
     '''main'''
-    
+
     rtr2 = {
         'device_type': 'cisco_ios',
         'ip': '50.76.53.27',
@@ -20,9 +17,9 @@ def main():
         'password': getpass(),
         }
 
-    
+
     conn = netmiko.ConnectHandler(**rtr2)
-    
+
     conn.config_mode()
     print("In config mode?")
     print(conn.check_config_mode())

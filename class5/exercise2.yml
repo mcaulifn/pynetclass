@@ -2,7 +2,7 @@
 - hosts: local
   tasks:
     - name: Generate config files
-      template: src=/home/mcaulifn/pynet_class/class5/switch_template.j2
+      template: src=/home/mcaulifn/pynet_class/class5/switch_template2.j2
                 dest=/home/mcaulifn/pynet_class/class5/{{item.hostname}}.txt
       with_items:
           - {hostname: sw01, secret: noenablemode, access_vlan: 10, ip_addr: 10.10.10.2, default_gateway: 10.10.10.1, snmp_community: mchome, SNMPv3: True }

@@ -1,0 +1,14 @@
+---
+- hosts: local
+  tasks:
+    - name: Generate config files
+      template: src=/home/mcaulifn/pynet_class/class5/switch_template.j2
+                dest=/home/mcaulifn/pynet_class/class5/{{item.hostname}}.txt
+      with_items:
+          - {hostname: sw01, secret: noenablemode, access_vlan: 10, ip_addr: 10.10.10.2, default_gateway: 10.10.10.1, snmp_community: mchome, SNMPv3: True }
+          - {hostname: sw02, secret: noenablemode, access_vlan: 20, ip_addr: 10.10.20.2, default_gateway: 10.10.20.1, snmp_community: mchome, SNMPv3: False }
+          - {hostname: sw03, secret: noenablemode, access_vlan: 30, ip_addr: 10.10.30.2, default_gateway: 10.10.30.1, snmp_community: mchome1, SNMPv3: True }
+          - {hostname: sw04, secret: noenablemode, access_vlan: 40, ip_addr: 10.10.40.2, default_gateway: 10.10.40.1, snmp_community: mchome, SNMPv3: False }
+          - {hostname: sw05, secret: noenablemode, access_vlan: 50, ip_addr: 10.10.50.2, default_gateway: 10.10.50.1, snmp_community: mchome, SNMPv3: True }
+          - {hostname: sw06, secret: noenablemode, access_vlan: 60, ip_addr: 10.10.60.2, default_gateway: 10.10.60.1, snmp_community: mchome, SNMPv3: False }
+

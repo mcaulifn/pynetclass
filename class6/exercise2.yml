@@ -4,11 +4,20 @@
   
   tasks:
     - name: Configure switchport
-      eos_switchport: name={{ item.intname }} description="{{ item.desc }}" mode={{ item.mode}} access_vlan={{ item.access_vlan }}
+      eos_interface: name={{ item.intname }} description={{ item.desc }}
             username={{ eapi_username }}
             password={{ eapi_password }}
             host={{ eapi_hostname }}
             port={{ eapi_port }}
             transport=https
       with_items:
-        - {intname: Ethernet3, desc: "*** IN USE*** ", mode: access, access_vlan: 725}
+        - {intname: Ethernet3, desc: "*** IN USE***"}
+		
+      eos_switchport: name={{ item.intname }} mode={{ item.mode}} access_vlan={{ item.access_vlan }}
+            username={{ eapi_username }}
+            password={{ eapi_password }}
+            host={{ eapi_hostname }}
+            port={{ eapi_port }}
+            transport=https
+      with_items:
+        - {intname: Ethernet3, mode: access, access_vlan: 725}

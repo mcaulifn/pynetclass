@@ -4,13 +4,13 @@
   
   tasks:
     - name: Configure VLANs
-      eos_vlan: name={{ item.name }} vlanid={{ item.vlanid }}
-	        username={{ eapi_username }}
-		    password={{ eapi_password }}
-		    host={{ eapi_hotname }}
-		    port={{ eapi_port }}
-		    transport=https
-	  with_items:
-	    - {name: jd, vlanid: 123}
-		- {name: turk, vlanid:124}
-		- {name: elliot, vlanid:125}
+      eos_vlan: name={{ item.vlanname }} vlanid={{ item.vlanid }}
+            username={{ eapi_username }}
+            password={{ eapi_password }}
+            host={{ eapi_hostname }}
+            port={{ eapi_port }}
+            transport=https
+      with_items:
+        - {vlanname: vm1, vlanid: 723}
+        - {vlanname: vm2, vlanid: 724}
+        - {vlanname: vm3, vlanid: 725}

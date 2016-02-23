@@ -1,9 +1,9 @@
 ---
-- name: exercise 1
+- name: exercise 2
   hosts: arista
   
   tasks:
-    - name: Configure VLANs
+    - name: Configure switchport
       eos_switchport: name={{ item.intname }} description="{{ item.desc }}" mode={{ item.mode}} access_vlan={{ item.access_vlan }}
             username={{ eapi_username }}
             password={{ eapi_password }}

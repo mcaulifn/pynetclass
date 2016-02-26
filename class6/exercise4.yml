@@ -23,7 +23,7 @@
             port={{ eapi_port }}
             transport=https
       with_items:
-        - {intname: Ethernet3, mode: access, access_vlan: 1, trunk_allowed_vlans: "" }
+        - {intname: Ethernet3, mode: access, access_vlan: 1, trunk_allowed_vlans: "1-4096" }
     
     - name: Remove VLANs
       eos_vlan: vlanid={{ item.vlanid }} state=absent

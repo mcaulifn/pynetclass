@@ -1,0 +1,38 @@
+---
+- name: exercise 2
+  hosts: arista
+  
+  tasks:
+    - name: Configure interface
+      eos_interface: name={{ item.intname }} description="{{ item.desc }}"
+            username={{ eapi_username }}
+            password={{ eapi_password }}
+            host={{ eapi_hostname }}
+            port={{ eapi_port }}
+            transport=https
+      with_items:
+        - {intname: Ethernet3, desc: ""}
+
+        
+    - name: Configure switchport
+      eos_switchport: name={{ item.intname }} mode={{ item.mode}} access_vlan={{ item.access_vlan }} 
+                      trunk_allowed_vlans={{ item.trunk_allowed_vlans }}
+            username={{ eapi_username }}
+            password={{ eapi_password }}
+            host={{ eapi_hostname }}
+            port={{ eapi_port }}
+            transport=https
+      with_items:
+        - {intname: Ethernet3, mode: access, access_vlan: 1, trunk_allowed_vlans: "" }
+    
+    - name: Remove VLANs
+      eos_vlan: vlanid={{ item.vlanid }} state=absent
+            username={{ eapi_username }}
+            password={{ eapi_password }}
+            host={{ eapi_hostname }}
+            port={{ eapi_port }}
+            transport=https
+      with_items:
+        - {vlanid: 723}
+        - {vlanid: 724}
+        - {vlanid: 725}

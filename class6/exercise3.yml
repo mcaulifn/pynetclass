@@ -23,4 +23,4 @@
             port={{ eapi_port }}
             transport=https
       with_items:
-        - {intname: Ethernet3, mode: trunk, trunk_native_vlan: 1, trunk_allowed_vlans: 723,724,725}
+        - {intname: Ethernet3, mode: trunk, trunk_native_vlan: 1, trunk_allowed_vlans: "723,724,725" }

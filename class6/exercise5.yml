@@ -1,0 +1,15 @@
+---
+- name: File transfer for rtr1
+  hosts: pynet-rtr1
+  
+  tasks:
+  - name: File transfer
+    cisco_file_transfer:
+      source_file="/home/mcaulifn/ANSIBLE/njm.txt"
+      dest_file=njm.txt
+      overwrite=false
+      enable_scp=true
+      host={{ host }}
+      port={{ port }}
+      username={{ username }}
+      password={{ password }}

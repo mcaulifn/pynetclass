@@ -40,7 +40,7 @@ def main():
 
     #Check if vlan exists
     vlan_exists = enable_cmds(node, 'show vlan id %s' % vlan_id)
-    if vlan_exists not False:
+    if not vlan_exists:
         vlan_exists = vlan_exists['vlans']
 
     if remove:

@@ -2,7 +2,6 @@
 from __future__ import print_function
 import argparse
 import pyeapi
-from pprint import pprint
 
 
 def enable_cmds(conn, cmds):
@@ -40,7 +39,6 @@ def main():
 
     #Check if vlan exists
     vlan_exists = enable_cmds(node, 'show vlan id %s' % vlan_id)
-    pprint(vlan_exists)
     if vlan_exists is not False:
         vlan_exists = vlan_exists['vlans']
 

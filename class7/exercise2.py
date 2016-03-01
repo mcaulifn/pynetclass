@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 from __future__ import print_function
-from pprint import pprint
-import pyeapi
-import sys
 import argparse
+import pyeapi
+
 
 def enable_cmds(conn, cmds):
     '''run commands in enable mode, return output'''
@@ -23,7 +22,7 @@ def strip_output(output):
     return output[0]['result']
 
 def main():
-
+    '''main'''
     node = pyeapi.connect_to('pynet-sw3')
 
     #Creating parser for run-time variables

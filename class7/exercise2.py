@@ -28,7 +28,7 @@ def main():
     #Creating parser for run-time variables
     parser = argparse.ArgumentParser(description="Add/remove VLAN")
     parser.add_argument("vlan_id", help="VLAN number to create or remove", action="store", type=int)
-    parser.add_argument('-name', action='store', dest='vlan_name', help='Name of VLAN')
+    parser.add_argument('--name', action='store', dest='vlan_name', help='Name of VLAN')
     parser.add_argument("--remove", action="store_true", help="Remove the supplied VLAN ID")
 
     #Parsing input

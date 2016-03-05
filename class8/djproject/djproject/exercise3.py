@@ -24,5 +24,8 @@ def main():
         port=11022,
     )
 
+    for device in NetworkDevice.objects.all():
+        print(device.device_name)
+
 if __name__ == "__main__":
     main()

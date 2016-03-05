@@ -7,11 +7,11 @@ from net_system.models import NetworkDevice, Credentials
 
 
 def main():
-   '''main'''
-   
-   django.setup()
-   
-   for device in NetworkDevice.objects.all():
+    '''main'''
+
+    django.setup()
+
+    for device in NetworkDevice.objects.all():
         if device.device_type == 'cisco_ios':
             device.credentials = Credentials.objects.get(username='pyclass')
         elif device.device_type == 'juniper':

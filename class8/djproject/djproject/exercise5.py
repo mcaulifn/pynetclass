@@ -15,12 +15,14 @@ def main():
 
     starttime = datetime.now()
     for each in NetworkDevice.objects.all():
+        print('*' * 80)
         conn = netmiko.ConnectHandler(device_type=each.device_type, ip=each.ip_address,
                                       username=each.credentials.username, password=each.credentials.password,
                                       port=each.port)
 
         print(conn.send_command('show arp'))
         conn.disconnect()
+
     print("Elapsed time: %s" %str(datetime.now()-starttime))
 
 if __name__ == "__main__":

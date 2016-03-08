@@ -1,5 +1,5 @@
 #/usr/bin/env python
-'''run show arp on each device ind db'''
+'''run show version on each device in db'''
 
 from __future__ import print_function
 from datetime import datetime

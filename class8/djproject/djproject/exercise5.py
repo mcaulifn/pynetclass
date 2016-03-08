@@ -20,7 +20,7 @@ def main():
                                       username=each.credentials.username, password=each.credentials.password,
                                       port=each.port)
 
-        print(conn.send_command('show arp'))
+        print(conn.send_command('show version'))
         conn.disconnect()
 
     print("Elapsed time: %s" %str(datetime.now()-starttime))

@@ -19,7 +19,7 @@ def run_command_thread(device, cmd, q):
     output += conn.send_command(cmd)
     output_temp[device.device_name] = output
     q.put(output_temp)
-    
+
     conn.disconnect()
 
 def main():
@@ -42,9 +42,9 @@ def main():
         each_proc.join()
 
     while not output_queue.empty():
-        for key,value in output_queue.get().iteritems():
-            print(key)
-            print(value)
+        for dev_name, out in output_queue.get().iteritems():
+            print(dev_name)
+            print(out)
 
     print("Elapsed time: %s" %str(datetime.now()-starttime))
 

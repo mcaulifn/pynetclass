@@ -1,0 +1,23 @@
+(applied_python)[mcaulifn@ip-172-30-0-217 class9]$ python
+Python 2.7.10 (default, Dec  8 2015, 18:25:23)
+[GCC 4.8.3 20140911 (Red Hat 4.8.3-9)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import mytest
+>>> func1()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'func1' is not defined
+>>> mytest.func1()
+This is func1 from world.py.
+>>> mytest.func2()
+This is func2 from simple.py.
+>>> mytest.func3()
+This is func3 from whatever.py.
+>>> from mytest import func1, func2, func3
+>>> func1()
+This is func1 from world.py.
+>>> func2()
+This is func2 from simple.py.
+>>> func3()
+This is func3 from whatever.py.
+

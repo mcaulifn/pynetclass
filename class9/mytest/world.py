@@ -19,6 +19,9 @@ class MyClass(object):
         return
 
 class MyChildClass(MyClass):
+    def __init__(self):
+        print("__init__ from child class")
+
     def hello(self):
         print("This is different.")
         print("Still saying 'hi', though.")

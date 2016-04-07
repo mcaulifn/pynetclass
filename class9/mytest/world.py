@@ -18,6 +18,13 @@ class MyClass(object):
         print("%s, %s, and %s were the variables passed in." %(str(self.var1), str(self.var2), str(self.var3)))
         return
 
+class MyChildClass(MyClass):
+    def hello(self):
+        print("This is different.")
+        print("Still saying 'hi', though.")
+        print("%s, %s, and %s were the variables passed in." %(str(self.var1), str(self.var2), str(self.var3)))
+        return
+
 def func1():
     print("This is func1 from world.py.")
 

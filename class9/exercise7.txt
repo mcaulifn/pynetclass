@@ -14,3 +14,16 @@ export PATH
 PYTHONPATH="${PYTHONPATH}:/home/mcaulifn/pynet_class/class9/mytest/"
 export PYTHONPATH
 
+
+
+
+
+(applied_python)[mcaulifn@ip-172-30-0-217 class9]$ python
+Python 2.7.10 (default, Dec  8 2015, 18:25:23)
+[GCC 4.8.3 20140911 (Red Hat 4.8.3-9)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import sys
+>>> sys.path
+['', '/home/mcaulifn/DJANGOX/djproject', '/home/mcaulifn/pynet_class/class9/mytest', '/home/mcaulifn/applied_python/local/lib64/python2.7/site-packages', '/home/mcaulifn/applied_python/local/lib/python2.7/site-packages', '/home/mcaulifn/applied_python/lib64/python2.7', '/home/mcaulifn/applied_python/lib/python2.7', '/home/mcaulifn/applied_python/lib64/python2.7/site-packages', '/home/mcaulifn/applied_python/lib/python2.7/site-packages', '/home/mcaulifn/applied_python/lib64/python2.7/lib-dynload', '/usr/lib64/python2.7', '/usr/lib/python2.7']
+>>>
+
